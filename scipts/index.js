@@ -16,13 +16,47 @@ let coinCount = 100;
 const coinCountDisplay = document.getElementById('coin-count');
 coinCountDisplay.textContent = coinCount;
 
+// Recharge Functionality
+function rechargeToast(message, onRecharge) {
+    const toastContainer = document.createElement('div');
+    toastContainer.id = 'toast-content';
+    toastContainer.className = 'toast toast-center toast-middle flex items-center justify-center z-50';
+
+    toastContainer.innerHTML = `
+      <div class="alert alert-info flex flex-col items-center gap-2">
+        <span>${message}</span>
+        <button class="btn btn-success btn-sm mt-2" id="recharge-btn">Recharge Now</button>
+      </div>
+    `;
+    document.body.appendChild(toastContainer);
+
+     document.addEventListener('mousedown', function (e) {
+        if (!document.getElementById('toast-content').contains(e.target)) {
+            toastContainer.remove();
+        }
+    });
+   toastContainer.querySelector('#recharge-btn').onclick = function () {
+    if (typeof onRecharge === 'function') onRecharge();
+    toastContainer.remove();
+    return;
+};
+}
+
 const callButtons = document.querySelectorAll(".call-btn");
 callButtons.forEach(button => {
     button.addEventListener("click", function () {
         if (coinCount < 20) {
-            alert("❌ Insufficient coins! You need at least 20 coins to make a call.\n \n💰 Please recharge your account.");
+            rechargeToast(
+                "❌ Insufficient coins! You need at least 20 coins to make a call. <br> 💰 Please recharge your account.",
+                function () {
+                    coinCount = 100;
+                    coinCountDisplay.textContent = coinCount;
+                    alert("✅ Recharge successful! You have been credited with 100 coins.");
+                }
+            );
             return;
         }
+
         const card = this.closest('.card');
         const serviceNameElem = card.querySelector('.service-name');
         const serviceNumberElem = card.querySelector('.service-number');
