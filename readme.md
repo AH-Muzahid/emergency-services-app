@@ -48,7 +48,7 @@
 
 **This is useful** because, if there are many buttons, there is no need to attach a separate listener to each one, just add one to the parent and everything will work. Also, many times dynamic elements are created, such as when a new list item is added, there is no need to attach a new listener to them, because the parent's listener is already working.
 
-### 4. What is the difference between preventDefault() and stopPropagation() methods?
+### 5. What is the difference between preventDefault() and stopPropagation() methods?
 ## Answer:
 - **preventDefault()**= This method disables the browser's default behavior. For example,
 Submitting a form normally reloads the page. Using event.preventDefault() will prevent the page from reloading even if the form is submitted.
