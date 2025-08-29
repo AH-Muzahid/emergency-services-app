@@ -3,7 +3,6 @@
 const callHistoryList = document.getElementById('callHistoryList');
 callHistoryList.innerHTML = "";
 
-
 document.getElementById("clearHistoryBtn").addEventListener("click", function () {
     callHistoryList.innerHTML = "";
 
@@ -65,7 +64,6 @@ callButtons.forEach(button => {
         coinCount -= 20;
         coinCountDisplay.textContent = coinCount;
         alert(`📞 Calling ${serviceName}\nNumber: ${serviceNumber}\n\n✅ Call initiated successfully!\n💰 20 coins deducted. Remaining: ${coinCount} coins`)
-
 
         const callHistory = document.getElementById('callHistoryList');
         const newCall = document.createElement('div');
